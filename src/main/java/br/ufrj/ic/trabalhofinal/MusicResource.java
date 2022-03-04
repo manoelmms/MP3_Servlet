@@ -6,11 +6,7 @@ import javax.ws.rs.*;
 public class MusicResource {
     @GET
     @Produces("text/html")
-    public String listar(@QueryParam("q") @DefaultValue("") String filepath) {
-        try {
-            return MusicApplication.infoMP3("/Users/manoelsilva/" + filepath);//nao gosta de espaço
-        } catch (Exception e) {
-            return null;
-        }
+    public String listar(@QueryParam("q") @DefaultValue("") String filename) {
+        return MusicApplication.createFinalHTML();
     }
 }
