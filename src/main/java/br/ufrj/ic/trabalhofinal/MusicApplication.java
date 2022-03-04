@@ -17,7 +17,7 @@ import javax.ws.rs.core.Application;
 @ApplicationPath("/api")
 @MultipartConfig
 public class MusicApplication extends Application{
-    public static String filepath = "/Users/manoelsilva/output.mp3";
+    public static String filepath = "./output.mp3";
 
     protected static String sucessoHTML(){
         String html = "<html><head><meta charset=\"UTF-8\"><title>Sucesso!</title></head>";
@@ -51,17 +51,15 @@ public class MusicApplication extends Application{
         }
     }
 
-    protected static String salvarParam(String titulo){
+    protected static String salvarParam(String titulo, String filename){
         try {
             Mp3File mp3file = new Mp3File(filepath);
+            Map<String, Object> mp3Info = infoMP3(filepath);
             ID3v2 id3v2Tag;
             id3v2Tag = mp3file.getId3v2Tag();
             id3v2Tag.setTitle(titulo);
-            mp3file.save("output.mp3");
-            String html = "<html><head><meta charset=\"UTF-8\"><title>Sucesso!</title></head>";
-            html += "<body><h2>Sucesso no Upload!</h2><p>O arquivo foi gravado com sucesso!</p><p><a href=\"file\">Voltar</a></p></body></html>";
-            html += "<h1>" + id3v2Tag.getTitle() + "</h1>";
-            return html;
+            mp3file.save(filename);
+            return sucessoHTML();
         }catch (Exception e){
             return erroHTML();
         }
@@ -110,13 +108,16 @@ public class MusicApplication extends Application{
 
     }
 
-    private static String htmlForm() {
+    private static String htmlForm(String filename) {
         Map<String, Object> showId3v2Tags = showId3v2Tags(filepath);
 
         String formhtml = "<form method=\"GET\" action=\"salvar\">";
 
+        formhtml += "<label for=\"filename\">Nome do arquivo:</label><br>";
+        formhtml += "<input type=\"filename\" id=\"filename\" name=\"filename\" value=" + filename + "><br>"; // alterar para remover o ".mp3" ou não?
+
         formhtml += "<label for=\"titulo\">Titulo:</label><br>";
-        formhtml += "<input type=\"text\" id=\"titulo\" name=\"titulo\" value=" + showId3v2Tags.get("titulo") + "><br>"; //TODO: forms pegando somente uma palavra
+        formhtml += "<input type=\"text\" id=\"titulo\" name=\"titulo\" value=" + showId3v2Tags.get("titulo") + " ><br>"; //TODO: forms pegando somente uma palavra
 
         formhtml += "<label for=\"artista\">Artista:</label><br>";
         formhtml += "<input type=\"text\" id=\"artista\" name=\"artista\" value=" + showId3v2Tags.get("artista") + "><br>";
@@ -173,9 +174,9 @@ public class MusicApplication extends Application{
     }
 
 
-    public static String createFinalHTML(){
+    public static String createFinalHTML(String filename){
         String html = "<html><head><meta charset=\"UTF-8\"><title>Dados do MP3</title></head>";
-        html += "<body><h2>Informações sobre a música</h2><h3>Os dados imutáveis são</h3>" + immutableObjectsHTML() + "<h3>Os dados mutáveis são</h3>" + htmlForm() + "<p><a href=\"file\">Cancelar</a></p><body></html>";
+        html += "<body><h2>Informações sobre a música</h2><h3>Os dados imutáveis são</h3>" + immutableObjectsHTML() + "<h3>Os dados mutáveis são</h3>" + htmlForm(filename) + "<p><a href=\"file\">Cancelar</a></p><body></html>";
         /*html = html.replace("$formadicionar", htmlForm());*/ // TODO: consertar o replace
         return html;
     }

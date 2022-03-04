@@ -23,7 +23,7 @@ public class FileUploadService extends HttpServlet {
         Part filePart = request.getPart("file"); // Recebe o Input do file
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // Nome do Arquivo
         //InputStream fileContent = filePart.getInputStream();
-        File uploads = new File("/Users/manoelsilva"); //Prepara a gravação no local escolhido
+        File uploads = new File("./"); //Prepara a gravação no local escolhido
         File file = new File(uploads, "output.mp3");
         try (InputStream fileContent = filePart.getInputStream()) {
             Files.copy(fileContent, file.toPath(), StandardCopyOption.REPLACE_EXISTING);//Grava no arquivo preparado

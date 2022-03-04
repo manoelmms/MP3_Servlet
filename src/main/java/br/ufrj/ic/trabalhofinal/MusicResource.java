@@ -7,6 +7,6 @@ public class MusicResource {
     @GET
     @Produces("text/html")
     public String listar(@QueryParam("q") @DefaultValue("") String filename) {
-        return MusicApplication.createFinalHTML();
+        return MusicApplication.createFinalHTML(filename);
     }
 }
