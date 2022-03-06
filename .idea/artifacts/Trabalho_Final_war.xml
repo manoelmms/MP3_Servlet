@@ -3,18 +3,15 @@
     <output-path>$PROJECT_DIR$/target</output-path>
     <properties id="maven-jee-properties">
       <options>
-        <exploded>false</exploded>
         <module>Trabalho Final</module>
         <packaging>war</packaging>
-        <unpackNestedArchives>false</unpackNestedArchives>
       </options>
     </properties>
     <root id="archive" name="TrabalhoFinal-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="Trabalho Final:war exploded" />
       <element id="directory" name="WEB-INF">
-        <element id="directory" name="classes" />
         <element id="directory" name="lib">
-          <element id="library" level="project" name="mp3agic-0.9.1" />
+          <element id="file-copy" path="$PROJECT_DIR$/jar/mp3agic-0.9.1.jar" />
         </element>
       </element>
     </root>

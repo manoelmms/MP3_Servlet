@@ -1,0 +1,72 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, SansSerif;
+}
+
+body{
+    display: grid;
+    align-self: center;
+    background: #0a0101;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+form, .immutables {
+    width: 80%;
+    background: white;
+    margin: 10px;
+    padding: 40px 40px;
+    border-radius: 10px;
+    grid-row: 2;
+}
+form{
+    grid-column: 2;
+}
+
+fieldset{
+    font-size: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border: none;
+}
+
+
+legend, h2{
+    font-size: 40px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.form-div {
+    width: calc(100%/2 - 20px);
+}
+
+input{
+    height: 30px;
+    width: 100%;
+    padding-left: 15px;
+    border-radius: 10px;
+}
+
+.mutable-label{
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.immutables {
+    grid-column: 1;
+}
+
+h1{
+    text-align: center;
+    justify-content: center;
+    color: aquamarine;
+    grid-column: 1 / span 2;
+    grid-row: 1;
+}
+a{
+    grid-row: 3;
+}
