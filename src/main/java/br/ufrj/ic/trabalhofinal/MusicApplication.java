@@ -32,7 +32,7 @@ public class MusicApplication extends Application{
     }
 
     protected static Map<String, Object> infoMP3(String filepath){
-        Map<String, Object> mp3Info = new HashMap<String, Object>();
+        Map<String, Object> mp3Info = new HashMap<>();
         try {
             Mp3File mp3file = new Mp3File(filepath);
             mp3Info.put("duracao", mp3file.getLengthInSeconds());
@@ -51,20 +51,7 @@ public class MusicApplication extends Application{
         }
     }
 
-    protected static String salvarParam(String titulo, String filename){
-        try {
-            Mp3File mp3file = new Mp3File(filepath);
-            Map<String, Object> mp3Info = infoMP3(filepath);
-            ID3v2 id3v2Tag;
-            id3v2Tag = mp3file.getId3v2Tag();
-            id3v2Tag.setTitle(titulo);
-            mp3file.save(filename);
-            return sucessoHTML();
-        }catch (Exception e){
-            return erroHTML();
-        }
 
-    }
 
     protected static Map<String, Object> showId3v2Tags(String filepath){
         Map<String, Object> id3v2Map = new HashMap<String, Object>();

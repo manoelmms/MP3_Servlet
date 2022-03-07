@@ -19,16 +19,17 @@ public class MusicResource {
         Map<String, Object> infoMP3 = MusicApplication.infoMP3(MusicApplication.filepath);
         String immutables = "<div class=immutables>";
         immutables += "<h2>Dados imutáveis</h2>";
-        immutables += "<p>A duração é " + infoMP3.get("duracao") + " seg</p>"; // TODO: mudar para minuto:segundos
-        immutables += "<p> O tamanho é " + infoMP3.get("tamanho") + " bytes</p>";
-        immutables += "<p> A bitrate é " + infoMP3.get("bitrate") + " kbps</p>";
-        immutables += "<p> A versao é " + infoMP3.get("versao") + "</p>";
-        immutables += "<p> A taxa de amostragem é " + infoMP3.get("sample") + " Hz</p>";
-        immutables += "<p> O canal é do tipo " + infoMP3.get("channel") + "</p>";
-        immutables += "<p> ID3v1 " + infoMP3.get("id3v1") + "</p>";
-        immutables += "<p> ID3v2 " + infoMP3.get("id3v2") + "</p>";
-        immutables += "<p> Custom " + infoMP3.get("custom") + "</p>";
-        immutables += "</div>";
+        immutables += "<ul>";
+        immutables += "<li> A duração é " + infoMP3.get("duracao") + " seg</li>"; // TODO: mudar para minuto:segundos
+        immutables += "<li> O tamanho é " + infoMP3.get("tamanho") + " bytes</li>";
+        immutables += "<li> A bitrate é " + infoMP3.get("bitrate") + " kbps</li>";
+        immutables += "<li> A versao é " + infoMP3.get("versao") + " </li>";
+        immutables += "<li> A taxa de amostragem é " + infoMP3.get("sample") + " Hz</li>";
+        immutables += "<li> O canal é do tipo " + infoMP3.get("channel") + "</li>";
+        immutables += "<li> ID3v1 " + infoMP3.get("id3v1") + "</li>";
+        immutables += "<li> ID3v2 " + infoMP3.get("id3v2") + "</li>";
+        immutables += "<li> Custom " + infoMP3.get("custom") + "</li>";
+        immutables += "</ul></div>";
         return immutables;
     }
 
@@ -123,18 +124,42 @@ public class MusicResource {
                 "}\n";
 
         css +=  "body{\n" +
+                "    background-color: #0a0101;\n" +
+                /*"    background-image: linear-gradient(135deg, pink, purple);\n" +*/
+                "}\n";
+
+        css +=  "nav{\n" +
+                "    display: flex;\n" +
+                "    justify-content: space-around;\n" +
+                "    align-items: center;\n" +
+                "    background: purple;\n" +
+                "    height: 8vh;" +
+                "}\n";
+
+        css +=  "a{\n" +
+                "    color: white;\n" +
+                "    text-decoration: none;\n" +
+                "}\n\n" +
+
+                "a:hover{\n" +
+                "    color: red;\n" +
+                "    opacity: 0.8;\n" +
+                "}\n";
+
+        css +=  "main{\n" +
                 "      display: grid;\n" +
-                "      background: #0a0101;\n" +
                 "      grid-gap: 20px;\n" +
+                "      height: 92vh;" +
                 "}\n";
 
         css +=  "form, .immutables {\n" +
-                "    width: 100%;\n" +
+                "    width: 99%;\n" +
                 "    background: white;\n" +
-                "    padding: 40px 40px;\n" +
-                "    margin: 10px;" +
+                "    padding: 35px 35px;\n" +
+                "    margin: 5px;" +
                 "    border-radius: 10px;\n" +
-                "    grid-row: 2;" +
+                "    grid-row: 2;\n" +
+                "    opacity: 0.7;\n" +
                 "}\n";
 
         css +=  "form{\n" +
@@ -147,7 +172,8 @@ public class MusicResource {
                 "    flex-wrap: wrap;\n" +
                 "    justify-content: space-between;\n" +
                 "    border: none;\n" +
-                "}\n" +
+                "}\n\n" +
+
                 "legend, h2{\n" +
                 "    font-size: 40px;\n" +
                 "    margin-bottom: 10px;\n" +
@@ -156,6 +182,7 @@ public class MusicResource {
 
         css +=  ".form-div {\n" +
                 "    width: calc(100%/2 - 20px);\n" +
+                "    margin-bottom: 1vh;\n" +
                 "}\n";
 
         css +=  "input{\n" +
@@ -163,7 +190,8 @@ public class MusicResource {
                 "    width: 100%;\n" +
                 "    padding-left: 15px;\n" +
                 "    border-radius: 10px;\n" +
-                "}\n" +
+                "}\n\n" +
+
                 ".mutable-label{\n" +
                 "    font-weight: 500;\n" +
                 "    margin-bottom: 10px;\n" +
@@ -173,17 +201,25 @@ public class MusicResource {
                 "    grid-column: 1;\n" +
                 "}\n";
 
+        css +=  ".immutables ul{\n" +
+                "    list-style: none;\n" +
+                "}\n\n" +
+
+                ".immutables li{\n" +
+                "    margin-top: 1vh;\n" +
+                "}\n\n" +
+
+                ".immutables li::before{\n" +
+                "    content: \"■\";\n" +
+                "    padding-right: 8px;\n" +
+                "}\n";
+
         css+=   "h1{\n" +
                 "    text-align: center;\n" +
                 "    justify-content: center;\n" +
-                "    color: aquamarine;\n" +
-                "    grid-column: 1 / span 2;\n" +
-                "    grid-row: 1;\n" +
+                "    color: white;\n" +
                 "\n";
 
-        css +=  "a{\n" +
-                "    grid-row: 3;\n" +
-                "}";
 
         css += "</style>";
         return css;
@@ -192,11 +228,13 @@ public class MusicResource {
 
     public static String createFinalHTML(String filename){
         String html = "<html><head><meta charset=\"UTF-8\">" +
-                      "<title>AAAAAAAAA</title>" +
+                      "<title>Dados do MP3</title>" +
                       createCSS() +
                       "</head>";
 
-        html += "<body><h1>Informações sobre a música</h1>" + immutableObjectsHTML() + htmlForm(filename) + "<p><a href=\"file\">Cancelar</a></p><body></html>";
+        html += "<body><header>" +
+                "<nav><h1>Informações sobre a música</h1><p><a href=\"file\">Escolher outra música →</a></p></nav></header>"+
+                "<main>" + immutableObjectsHTML() + htmlForm(filename) + "</main><body></html>";
         /*html = html.replace("$formadicionar", htmlForm());*/ // TODO: consertar o replace
         return html;
     }
