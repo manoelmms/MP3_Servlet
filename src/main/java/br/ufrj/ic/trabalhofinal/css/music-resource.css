@@ -1,0 +1,104 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Verdana, SansSerif;
+}
+
+body{
+    background-color: #13293D;
+}
+
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #006494;
+    height: 8vh;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+a:hover{
+    color: red;
+    opacity: 0.8;
+}
+
+main{
+    margin-top: 3vh;
+    display: grid;
+    grid-gap: 20px;
+    height: 89vh;
+}
+
+form, .immutables{
+    width: 99%;
+    background: #E8F1F2;
+    padding: 35px 35px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 10px;
+    grid-row: 2;
+}
+
+form{
+    grid-column: 2;
+}
+
+fieldset{
+    font-size: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border: none;
+}
+
+
+legend, h2{
+    font-size: 40px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.form-div{
+    width: calc(100%/2 - 20px);
+    margin-bottom: 1vh;
+}
+
+input{
+    height: 30px;
+    width: 100%;
+    padding-left: 15px;
+    border-radius: 10px;
+}
+
+.mutable-label{
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.immutables{
+    grid-column: 1;
+}
+
+.immutables ul{
+    list-style: none;
+}
+
+.immutables li{
+    margin-top: 5px;
+}
+
+.immutables li::before{
+    content: "■";
+    padding-right: 8px;
+}
+
+h1{
+    text-align: center;
+    justify-content: center;
+    color: white;
+}
