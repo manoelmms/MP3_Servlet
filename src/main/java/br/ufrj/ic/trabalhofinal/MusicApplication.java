@@ -7,6 +7,7 @@ import com.mpatric.mp3agic.ID3v24Tag;
 import com.mpatric.mp3agic.Mp3File;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.servlet.annotation.MultipartConfig;
@@ -31,19 +32,19 @@ public class MusicApplication extends Application{
         return html;
     }
 
-    protected static Map<String, Object> infoMP3(String filepath){
-        Map<String, Object> mp3Info = new HashMap<>();
+    protected static LinkedHashMap<String, Object> immutableData(String filepath){
+        LinkedHashMap<String, Object> mp3Info = new LinkedHashMap<>();
         try {
             Mp3File mp3file = new Mp3File(filepath);
-            mp3Info.put("duracao", mp3file.getLengthInSeconds());
-            mp3Info.put("tamanho", mp3file.getLength());
-            mp3Info.put("bitrate", mp3file.getBitrate());
-            mp3Info.put("versao", mp3file.getVersion());
+            mp3Info.put("duração (min:seg)", secondsToMinutesColonSeconds(mp3file.getLengthInSeconds()));
+            mp3Info.put("tamanho", (mp3file.getLength() + " bytes"));
+            mp3Info.put("bitrate", (mp3file.getBitrate() + " Hz"));
+            mp3Info.put("versão", mp3file.getVersion());
             mp3Info.put("sample", mp3file.getSampleRate());
             mp3Info.put("channel", mp3file.getChannelMode());
-            mp3Info.put("id3v1", mp3file.hasId3v1Tag());
-            mp3Info.put("id3v2", mp3file.hasId3v2Tag());
-            mp3Info.put("custom", mp3file.hasCustomTag());
+            mp3Info.put("id3v1", englishBoolToPortugueseHave(mp3file.hasId3v1Tag()));
+            mp3Info.put("id3v2", englishBoolToPortugueseHave(mp3file.hasId3v2Tag()));
+            mp3Info.put("custom", englishBoolToPortugueseHave(mp3file.hasCustomTag()));
             return mp3Info;
 
         }catch (Exception e){
@@ -51,38 +52,49 @@ public class MusicApplication extends Application{
         }
     }
 
+    protected static LinkedHashMap<String, String> mutableData(String filepath){
+        LinkedHashMap<String, String> id3v2Map = new LinkedHashMap<>();
 
-
-    protected static Map<String, Object> showId3v2Tags(String filepath){
-        Map<String, Object> id3v2Map = new HashMap<String, Object>();
         try {
             Mp3File mp3file = new Mp3File(filepath);
             ID3v2 id3v2Tag;
 
             if (mp3file.hasId3v2Tag()) {
                 id3v2Tag = mp3file.getId3v2Tag();
-            } else if(mp3file.hasId3v1Tag()){
-                // mp3 does not have an ID3v2 tag, let's create one..
+            }
+            else if(mp3file.hasId3v1Tag()){
                 id3v2Tag = new ID3v24Tag();
                 mp3file.setId3v2Tag(id3v2Tag);
                 ID3v1 id3v1Tag;
+                //id3v2Tag = (ID3v2) mp3file.getId3v1Tag(); /*tem que ver se isso funciona*/
                 id3v1Tag = mp3file.getId3v1Tag();
+                id3v2Tag.setTitle(id3v1Tag.getTitle());
+                id3v2Tag.setArtist(id3v1Tag.getArtist());
+                id3v2Tag.setAlbum(id3v1Tag.getAlbum());
                 id3v2Tag.setTrack(id3v1Tag.getTrack());
-                id3v2Tag.setArtist(id3v1Tag.getArtist());//TODO: Fazer as outras tags
-
-            }else{
+                id3v2Tag.setYear(id3v1Tag.getYear());
+                id3v2Tag.setGenreDescription(id3v1Tag.getGenreDescription());
+                id3v2Tag.setComposer(""); /*ID3V1 não tem a tag Composer*/
+                id3v2Tag.setOriginalArtist(""); /*ID3V1 não tem a tag OriginalArtist*/
+                id3v2Tag.setComposer(id3v1Tag.getComment());
+                id3v2Tag.setCopyright(""); /*ID3V1 não tem a tag Copyright*/
+                id3v2Tag.setUrl(""); /*ID3V1 não tem a tag Url*/
+                id3v2Tag.setEncoder(""); /*ID3V1 não tem a tag Encoder*/
+            } else{
                 id3v2Tag = new ID3v24Tag();
                 mp3file.setId3v2Tag(id3v2Tag);
             }
-            id3v2Map.put("faixa", id3v2Tag.getTrack());
+
+
+            id3v2Map.put("título", id3v2Tag.getTitle());
             id3v2Map.put("artista", id3v2Tag.getArtist());
-            id3v2Map.put("album", id3v2Tag.getAlbum());
-            id3v2Map.put("titulo", id3v2Tag.getTitle());
+            id3v2Map.put("álbum", id3v2Tag.getAlbum());
+            id3v2Map.put("faixa", id3v2Tag.getTrack());
             id3v2Map.put("ano", id3v2Tag.getYear());
-            id3v2Map.put("genero", id3v2Tag.getGenreDescription());
-            id3v2Map.put("comentario", id3v2Tag.getComment());
+            id3v2Map.put("gênero", id3v2Tag.getGenreDescription());
             id3v2Map.put("compositor", id3v2Tag.getComposer());
             id3v2Map.put("artista original", id3v2Tag.getOriginalArtist());
+            id3v2Map.put("comentário", id3v2Tag.getComment());
             id3v2Map.put("copyright", id3v2Tag.getCopyright());
             id3v2Map.put("url", id3v2Tag.getUrl());
             id3v2Map.put("encoder", id3v2Tag.getEncoder());
@@ -92,5 +104,13 @@ public class MusicApplication extends Application{
         }catch (Exception e){
             return null;
         }
+    }
+
+    protected static String secondsToMinutesColonSeconds(long seconds){
+        return (int)seconds / 60 + ":" + (int)seconds % 60;
+    }
+
+    protected static String englishBoolToPortugueseHave(boolean bool){
+        return bool?"Possui":"Não possui";
     }
 }

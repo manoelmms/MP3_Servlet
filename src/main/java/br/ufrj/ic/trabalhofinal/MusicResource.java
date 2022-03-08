@@ -1,6 +1,9 @@
 package br.ufrj.ic.trabalhofinal;
 
+import com.sun.xml.internal.ws.util.StringUtils;
+
 import javax.ws.rs.*;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Path("/listar")
@@ -16,99 +19,38 @@ public class MusicResource {
 
 
     private static String immutableObjectsHTML(){
-        Map<String, Object> infoMP3 = MusicApplication.infoMP3(MusicApplication.filepath);
+        Map<String, Object> immutableInfoMP3 = MusicApplication.immutableData(MusicApplication.filepath);
         String immutables = "<div class=immutables>";
         immutables += "<h2>Dados imutáveis</h2>";
         immutables += "<ul>";
-        immutables += "<li> A duração é " + infoMP3.get("duracao") + " seg</li>"; // TODO: mudar para minuto:segundos
-        immutables += "<li> O tamanho é " + infoMP3.get("tamanho") + " bytes</li>";
-        immutables += "<li> A bitrate é " + infoMP3.get("bitrate") + " kbps</li>";
-        immutables += "<li> A versao é " + infoMP3.get("versao") + " </li>";
-        immutables += "<li> A taxa de amostragem é " + infoMP3.get("sample") + " Hz</li>";
-        immutables += "<li> O canal é do tipo " + infoMP3.get("channel") + "</li>";
-        immutables += "<li> ID3v1 " + infoMP3.get("id3v1") + "</li>";
-        immutables += "<li> ID3v2 " + infoMP3.get("id3v2") + "</li>";
-        immutables += "<li> Custom " + infoMP3.get("custom") + "</li>";
+
+        for (Map.Entry<String, Object> tags : immutableInfoMP3.entrySet()){
+            immutables += "<li>" + StringUtils.capitalize(tags.getKey())  + ": " + tags.getValue() + "</li>";
+        }
+        // TODO: mudar para minuto:segundos
         immutables += "</ul></div>";
         return immutables;
     }
 
 
     private static String htmlForm(String filename) {
-        Map<String, Object> showId3v2Tags = MusicApplication.showId3v2Tags(MusicApplication.filepath);
+        LinkedHashMap<String, String> mutableInfoMP3 = MusicApplication.mutableData(MusicApplication.filepath);
+        mutableInfoMP3.put("filename", filename);
 
         String formhtml = "<form method=\"GET\" action=\"salvar\">";
-
         formhtml += "<fieldset><legend>Dados mutáveis</legend>";
 
-        formhtml += "<div class=\"form-div\">";
-        formhtml += "<label class=\"mutable-label\" for=\"filename\">Nome do arquivo:</label>";
-        formhtml += "<input type=\"filename\" id=\"filename\" name=\"filename\" value='" + filename + "'>"; // alterar para remover o ".mp3" ou não?
-        formhtml += "</div>";
 
-        formhtml += "<div class=\"form-div\">";
-        formhtml += "<label class=\"mutable-label\" for=\"titulo\">Titulo:</label>";
-        formhtml += "<input type=\"text\" id=\"titulo\" name=\"titulo\" value='" + showId3v2Tags.get("titulo") + "' >"; //TODO: forms pegando somente uma palavra
-        formhtml += "</div>";
-
-        formhtml += "<div class=\"form-div\">";
-        formhtml += "<label class=\"mutable-label\" for=\"artista\">Artista:</label>";
-        formhtml += "<input type=\"text\" id=\"artista\" name=\"artista\" value='" + showId3v2Tags.get("artista") + "'>";
-        formhtml += "</div>";
-
-        formhtml += "<div class=\"form-div\">";
-        formhtml += "<label class=\"mutable-label\" for=\"album\">Album:</label>";
-        formhtml += "<input type=\"text\" id=\"album\" name=\"album\" value='" + showId3v2Tags.get("album") + "'>";
-        formhtml += "</div>";
-
-        formhtml += "<div class=\"form-div\">";
-        formhtml += "<label class=\"mutable-label\" for=\"faixa\">Faixa:</label>";
-        formhtml += "<input type=\"text\" id=\"faixa\" name=\"faixa\" value='" + showId3v2Tags.get("faixa") + "'>";
-        formhtml += "</div>";
-
-        formhtml += "<div class=\"form-div\">";
-        formhtml += "<label class=\"mutable-label\" for=\"ano\">Ano:</label>";
-        formhtml += "<input type=\"text\" id=\"ano\" name=\"ano\" value='" + showId3v2Tags.get("ano") + "'>";
-        formhtml += "</div>";
-
-        formhtml += "<div class=\"form-div\">";
-        formhtml += "<label class=\"mutable-label\" for=\"genero\">Genero:</label>";
-        formhtml += "<input type=\"text\" id=\"genero\" name=\"genero\" value='" + showId3v2Tags.get("genero") + "'>";
-        formhtml += "</div>";
-
-        formhtml += "<div class=\"form-div\">";
-        formhtml += "<label class=\"mutable-label\" for=\"compositor\">Compositor:</label>";
-        formhtml += "<input type=\"text\" id=\"compositor\" name=\"compositor\" value='" + showId3v2Tags.get("compositor") + "'>";
-        formhtml += "</div>";
-
-        formhtml += "<div class=\"form-div\">";
-        formhtml += "<label class=\"mutable-label\" for=\"artista original\">Artista original:</label>";
-        formhtml += "<input type=\"text\" id=\"artista original\" name=\"artista original\" value='" + showId3v2Tags.get("artista original") + "'>";
-        formhtml += "</div>";
-
-        formhtml += "<div class=\"form-div\">";
-        formhtml += "<label class=\"mutable-label\" for=\"comentario\">Comentario:</label>";
-        formhtml += "<input type=\"text\" id=\"comentario\" name=\"comentario\" value='" + showId3v2Tags.get("comentario") + "'>";
-        formhtml += "</div>";
-
-        formhtml += "<div class=\"form-div\">";
-        formhtml += "<label class=\"mutable-label\" for=\"copyright\">Copyright:</label>";
-        formhtml += "<input type=\"text\" id=\"copyright\" name=\"copyright\" value='" + showId3v2Tags.get("copyright") + "'>";
-        formhtml += "</div>";
-
-        formhtml += "<div class=\"form-div\">";
-        formhtml += "<label class=\"mutable-label\" for=\"URL\">url:</Label>";
-        formhtml += "<input type=\"text\" id=\"url\" name=\"url\" value='" + showId3v2Tags.get("url") + "'>";
-        formhtml += "</div>";
-
-        formhtml += "<div class=\"form-div\">";
-        formhtml += "<label class=\"mutable-label\" for=\"encoder\">Encoder:</label>";
-        formhtml += "<input type=\"text\" id=\"encoder\" name=\"encoder\" value='" + showId3v2Tags.get("encoder") + "'>";
-        formhtml += "</div>";
+        for (Map.Entry<String,String> tags : mutableInfoMP3.entrySet()){
+            formhtml += "<div class=\"form-div\">\n";
+            formhtml += "<label class=\"mutable-label\" for='" + tags.getKey() + "'>" + StringUtils.capitalize(tags.getKey()) + ":</label>";
+            formhtml += "<input type=\"text\" name='" + tags.getKey() + "'value='" + stringWrittenNull(tags.getValue()) + "'>"; //TODO: forms pegando somente uma palavra
+            formhtml += "</div>\n";
+        }
 
         formhtml += "<input type=\"submit\" value=\"Salvar\"></input>";
-
         formhtml += "</fieldset></form>";
+
         return formhtml;
     }
 
@@ -180,7 +122,7 @@ public class MusicResource {
                 "    font-weight: 500;\n" +
                 "}\n";
 
-        css +=  ".form-div {\n" +
+        css +=  ".form-div{\n" +
                 "    width: calc(100%/2 - 20px);\n" +
                 "    margin-bottom: 1vh;\n" +
                 "}\n";
@@ -197,7 +139,7 @@ public class MusicResource {
                 "    margin-bottom: 10px;\n" +
                 "}\n";
 
-        css+=   ".immutables {\n" +
+        css+=   ".immutables{\n" +
                 "    grid-column: 1;\n" +
                 "}\n";
 
@@ -230,12 +172,20 @@ public class MusicResource {
         String html = "<html><head><meta charset=\"UTF-8\">" +
                       "<title>Dados do MP3</title>" +
                       createCSS() +
-                      "</head>";
+                      //"<link rel='stylesheet' type='text/css' href='" + HttpServletRequest.getPathInfo() + "/style.css'/>" +
+        "</head>";
 
-        html += "<body><header>" +
-                "<nav><h1>Informações sobre a música</h1><p><a href=\"file\">Escolher outra música →</a></p></nav></header>"+
-                "<main>" + immutableObjectsHTML() + htmlForm(filename) + "</main><body></html>";
+        html += "<body>" +
+                "<header>" +
+                "<nav><h1>Informações sobre a música</h1><p><a href=\"file\">Escolher outra música →</a></p></nav>" +
+                "</header>"+
+                "<main>" + immutableObjectsHTML() + htmlForm(filename) + "</main>" +
+                "<body></html>";
         /*html = html.replace("$formadicionar", htmlForm());*/ // TODO: consertar o replace
         return html;
+    }
+
+    public static String stringWrittenNull(Object object){
+        return object==null?"":object.toString();
     }
 }

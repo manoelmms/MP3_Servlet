@@ -16,7 +16,7 @@ public class SalvarResource {
     protected static String salvarParam(String titulo, String filename){
         try {
             Mp3File mp3file = new Mp3File(MusicApplication.filepath);
-            Map<String, Object> mp3Info = MusicApplication.infoMP3(MusicApplication.filepath);
+            Map<String, Object> mp3Info = MusicApplication.immutableData(MusicApplication.filepath);
             ID3v2 id3v2Tag;
             id3v2Tag = mp3file.getId3v2Tag();
             id3v2Tag.setTitle(titulo);
