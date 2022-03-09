@@ -18,27 +18,27 @@ import java.nio.file.StandardCopyOption;
 @MultipartConfig
 public class FileUploadService extends HttpServlet {
 
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Part filePart = request.getPart("file"); // Recebe o Input do file
         String fileName = nameWithoutAmpersand(Paths.get(filePart.getSubmittedFileName()).getFileName().toString()); // Nome do Arquivo
-        //InputStream fileContent = filePart.getInputStream();
         File uploads = new File("./"); //Prepara a gravação no local escolhido
-        File file = new File(uploads, "output.mp3");
+        File file = new File(uploads, "output.mp3"); //Grava como output.mp3
+
         try (InputStream fileContent = filePart.getInputStream()) {
-            Files.copy(fileContent, file.toPath(), StandardCopyOption.REPLACE_EXISTING);//Grava no arquivo preparado
+            Files.copy(fileContent, file.toPath(), StandardCopyOption.REPLACE_EXISTING); //Grava no arquivo preparado
             response.sendRedirect("/TrabalhoFinal-1.0-SNAPSHOT/api/listar?q="+fileName);
-        }catch (IOException e){
+        } catch (IOException e) {
             response.sendRedirect("/TrabalhoFinal-1.0-SNAPSHOT/api/erro");
         }
     }
 
     public String nameWithoutAmpersand(String filename) {
         StringBuilder str = new StringBuilder();
+
         for (int character=0; character <filename.length(); ++character) {
-            if (filename.charAt(character) != '&'){
+            if (filename.charAt(character) != '&') {
                 str.append(filename.charAt(character));
-            }else{
+            } else {
                 str.append(("%26"));
             }
         }

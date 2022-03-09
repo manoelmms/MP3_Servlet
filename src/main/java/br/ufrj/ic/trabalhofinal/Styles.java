@@ -2,7 +2,7 @@ package br.ufrj.ic.trabalhofinal;
 
 public class Styles {
 
-    public static String UploadResourceCSS(){
+    public static String UploadResourceCSS() {
         String css = "<style>";
 
         css += "*{\n" +
@@ -87,13 +87,12 @@ public class Styles {
                 "#enviar:hover, .file-selector:hover{\n" +
                 "    background-color: rgba(133, 25, 150, 0.1);\n" +
                 "}\n";
-
         css += "</style>";
+
         return css;
     }
 
-
-    public static String MusicResourceCSS(){
+    public static String MusicResourceCSS() {
         String css = "<style>";
         css += "*{\n" +
                 "    margin: 0;\n" +
@@ -199,15 +198,14 @@ public class Styles {
                 "    color: white;\n" +
                 "    margin-left: 3vh;\n"+
                 "}\n";
-
-
         css += "</style>";
+
         return css;
     }
 
-
-    public static String SalvarResourceCSS(){
+    public static String SalvarResourceCSS() {
         String css = "<style>";
+
         css += "*{\n" +
                 "    margin: 0;\n" +
                 "    padding: 0;\n" +
@@ -293,6 +291,7 @@ public class Styles {
                 "}\n";
 
         css += "</style>";
+
         return css;
     }
 }

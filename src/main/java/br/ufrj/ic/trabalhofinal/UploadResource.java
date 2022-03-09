@@ -4,9 +4,10 @@ import javax.ws.rs.*;
 
 @Path("/file")
 public class UploadResource{
+
     @GET
     @Produces("text/html")
-    public String uploadForm(){
+    public String uploadForm() {
         String html = "<html><head><meta charset=\"UTF-8\"><title>Enviar MP3</title></head>" +
                 Styles.UploadResourceCSS() +
                 "<body>" +
@@ -18,11 +19,9 @@ public class UploadResource{
                 "</div>" +
                 "<input type=\"submit\" id=\"enviar\"/>" +
                 "</form>" +
-
-
                 "</body>" +
                 "</html>";
+
         return html;
     }
-
 }
