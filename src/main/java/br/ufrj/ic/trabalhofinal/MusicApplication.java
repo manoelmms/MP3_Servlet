@@ -23,7 +23,7 @@ public class MusicApplication extends Application{
 
     protected static String erroHTML(){
         String html = "<html><head><meta charset=\"UTF-8\"><title>Erro!</title></head>";
-        html += "<body><h2>Deu ruim!</h2><p>O arquivo não foi Gravado!</p><p><a href=\"file\">Voltar</a></p></body></html>";
+        html += "<body><h2>Deu ruim!</h2><p>O arquivo não pôde ser Lido/Gravado ou seu formato é incompartível!</p><p><a href=\"file\">Voltar</a></p></body></html>";
         return html;
     }
 
@@ -87,6 +87,8 @@ public class MusicApplication extends Application{
             id3v2Map.put("faixa", id3v2Tag.getTrack());
             id3v2Map.put("ano", id3v2Tag.getYear());
             id3v2Map.put("gênero", id3v2Tag.getGenreDescription());
+            id3v2Map.put("artista do álbum", id3v2Tag.getAlbumArtist());
+            //id3v2Map.put("número do gênero", Integer.toString(id3v2Tag.getGenre()));
             id3v2Map.put("compositor", id3v2Tag.getComposer());
             id3v2Map.put("artista original", id3v2Tag.getOriginalArtist());
             id3v2Map.put("comentário", id3v2Tag.getComment());
@@ -102,8 +104,7 @@ public class MusicApplication extends Application{
     }
 
     protected static String secondsToMinutesColonSeconds(long seconds){
-
-        return (int)seconds / 60 + ":" + (int)seconds % 60;
+        return (int)seconds / 60 + ":" + String.format("%02d", seconds % 60);
     }
 
     protected static String englishBoolToPortugueseHave(boolean bool){

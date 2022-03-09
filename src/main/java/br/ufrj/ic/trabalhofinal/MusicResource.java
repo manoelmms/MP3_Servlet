@@ -111,20 +111,24 @@ public class MusicResource {
 
 
     public static String createFinalHTML(String filename){
-        String html = "<html><head><meta charset=\"UTF-8\">" +
-                "<title>Dados do MP3</title>" +
-                Styles.MusicResourceCSS() +
-                //"<link rel='stylesheet' type='text/css' href='" + HttpServletRequest.getPathInfo() + "/music-resource.css'/>" +
-                "</head>";
+        try{
+            String html = "<html><head><meta charset=\"UTF-8\">" +
+                    "<title>Dados do MP3</title>" +
+                    Styles.MusicResourceCSS() +
+                    //"<link rel='stylesheet' type='text/css' href='" + HttpServletRequest.getPathInfo() + "/music-resource.css'/>" +
+                    "</head>";
 
-        html += "<body>" +
-                "<header>" +
-                "<nav><h1>Informações sobre a música</h1><p><a href=\"file\">Escolher outra música →</a></p></nav>" +
-                "</header>"+
-                "<main>" + immutableObjectsHTML() + htmlForm(filename) + "</main>" +
-                "<body></html>";
+            html += "<body>" +
+                    "<header>" +
+                    "<nav><h1>Informações sobre a música</h1><p><a href=\"file\">Escolher outra música →</a></p></nav>" +
+                    "</header>"+
+                    "<main>" + immutableObjectsHTML() + htmlForm(filename) + "</main>" +
+                    "<body></html>";
 
-        return html;
+            return html;
+        }catch(Exception e){
+            return MusicApplication.erroHTML();
+        }
     }
 
     public static String stringWrittenNull(Object object){
