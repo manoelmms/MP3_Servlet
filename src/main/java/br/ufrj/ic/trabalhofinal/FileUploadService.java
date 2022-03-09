@@ -21,7 +21,7 @@ public class FileUploadService extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Part filePart = request.getPart("file"); // Recebe o Input do file
-        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // Nome do Arquivo
+        String fileName = nameWhitoutAmpersand(Paths.get(filePart.getSubmittedFileName()).getFileName().toString()); // Nome do Arquivo
         //InputStream fileContent = filePart.getInputStream();
         File uploads = new File("./"); //Prepara a gravação no local escolhido
         File file = new File(uploads, "output.mp3");
@@ -32,5 +32,17 @@ public class FileUploadService extends HttpServlet {
             response.sendRedirect("/TrabalhoFinal-1.0-SNAPSHOT/api/"); // TODO: fazer endpoint erro
             //MusicApplication.erroHTML();
         }
+    }
+
+    public String nameWhitoutAmpersand(String filename) {
+        StringBuilder str = new StringBuilder();
+        for (int character=0; character <filename.length(); ++character) {
+            if (filename.charAt(character) != '&'){
+                str.append(filename.charAt(character));
+            }else{
+                str.append(("%26"));
+            }
+        }
+        return str.toString();
     }
 }
