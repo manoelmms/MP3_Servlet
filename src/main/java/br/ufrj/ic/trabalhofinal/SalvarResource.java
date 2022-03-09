@@ -5,7 +5,6 @@ import com.mpatric.mp3agic.ID3v24Tag;
 import com.mpatric.mp3agic.Mp3File;
 
 import javax.ws.rs.*;
-import java.util.Map;
 
 @Path("/salvar")
 public class SalvarResource {
@@ -32,7 +31,7 @@ public class SalvarResource {
             filename += ".mp3";
             Mp3File mp3file = new Mp3File(MusicApplication.filepath);
             ID3v2 oldId3v2Tag;
-            oldId3v2Tag = new ID3v24Tag();
+            //oldId3v2Tag = new ID3v24Tag();
             oldId3v2Tag = mp3file.getId3v2Tag();
             byte[] albumImageData = oldId3v2Tag.getAlbumImage();
             String mimeType = oldId3v2Tag.getAlbumImageMimeType();
@@ -46,7 +45,7 @@ public class SalvarResource {
             id3v2Tag.setTrack(faixa);
             id3v2Tag.setYear(ano);
             if(!genero.equals("-1")){
-                id3v2Tag.setGenre(Integer.valueOf(genero));
+                id3v2Tag.setGenre(Integer.parseInt(genero));
             }
             id3v2Tag.setComposer(compositor);
             id3v2Tag.setOriginalArtist(original);
@@ -60,7 +59,7 @@ public class SalvarResource {
 
             return sucessoHTML(filename);
         }catch (Exception e){
-            return MusicApplication.erroHTML();
+            return MusicApplication.erroHTML(e.getMessage());
         }
     }
 
