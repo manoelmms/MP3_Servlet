@@ -1,3 +1,8 @@
+/*
+ *Manoel Marcelo da Silva (DRE: 121088349)
+ *Lucas de Lyra Monteiro (DRE: 121039714)
+ */
+
 package br.ufrj.ic.trabalhofinal;
 
 import com.mpatric.mp3agic.InvalidDataException;
@@ -56,7 +61,7 @@ public class MusicResource {
         Map<String, Object> immutableInfoMP3 = MusicApplication.immutableData(MusicApplication.FILEPATH);
 
         String immutablesHtml = "<div class=immutables>";
-        immutablesHtml += "<h2>Dados imutáveis</h2>";
+        immutablesHtml += "<h2>Dados do Arquivo</h2>";
         immutablesHtml += "<ul>";
 
         for (Map.Entry<String, Object> tags : immutableInfoMP3.entrySet()) {
@@ -70,10 +75,10 @@ public class MusicResource {
 
     private static String htmlForm(String filename) throws IOException, UnsupportedTagException, InvalidDataException {
         LinkedHashMap<String, String> mutableInfoMP3 = MusicApplication.mutableData(MusicApplication.FILEPATH);
-        mutableInfoMP3.put("filename", filename.replace(".mp3", ""));
+        mutableInfoMP3.put("nome do arquivo", filename.replace(".mp3", ""));
 
         String formHtml = "<form method=\"GET\" action=\"salvar\">";
-        formHtml += "<fieldset><legend>Dados mutáveis</legend>";
+        formHtml += "<fieldset><legend>Metadados do MP3</legend>";
 
         for (Map.Entry<String,String> tags : mutableInfoMP3.entrySet()) {
             formHtml += "<div class=\"form-div\">";

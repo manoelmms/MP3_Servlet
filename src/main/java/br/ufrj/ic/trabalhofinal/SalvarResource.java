@@ -1,3 +1,8 @@
+/*
+ *Manoel Marcelo da Silva (DRE: 121088349)
+ *Lucas de Lyra Monteiro (DRE: 121039714)
+ */
+
 package br.ufrj.ic.trabalhofinal;
 
 import com.mpatric.mp3agic.ID3v2;
@@ -5,6 +10,7 @@ import com.mpatric.mp3agic.ID3v24Tag;
 import com.mpatric.mp3agic.Mp3File;
 
 import javax.ws.rs.*;
+
 
 @Path("/salvar")
 public class SalvarResource {
@@ -24,7 +30,7 @@ public class SalvarResource {
                          @QueryParam("url") @DefaultValue("") String url,
                          @QueryParam("encoder") @DefaultValue("") String encoder,
                          @QueryParam("artista do álbum") @DefaultValue("") String artAlbum,
-                         @QueryParam("filename") @DefaultValue("") String filename){
+                         @QueryParam("nome do arquivo") @DefaultValue("") String filename){
 
         try {
             filename += ".mp3";
@@ -84,7 +90,7 @@ public class SalvarResource {
                 "<h1>Download do Arquivo</h1><p><a href=\"file\">Escolher outra música →</a></p>" +
                 "</nav></header>" +
                 "<main>"+
-                "<h2>Sucesso no Upload!</h2>" +
+                "<h2>Alterado com Sucesso!</h2>" +
                 "<div id=\"download-div\">" +
                 "<form method=\"GET\" action=\"download\\" + filename + "\">" +
                 "<input id=\"download-image\" type=\"submit\" value=\"Download\">\n" +

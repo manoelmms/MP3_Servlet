@@ -1,3 +1,8 @@
+/*
+ *Manoel Marcelo da Silva (DRE: 121088349)
+ *Lucas de Lyra Monteiro (DRE: 121039714)
+ */
+
 package br.ufrj.ic.trabalhofinal;
 
 import com.mpatric.mp3agic.*;
@@ -6,8 +11,7 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 
 import javax.servlet.annotation.MultipartConfig;
-import javax.swing.text.StyledEditorKit;
-import javax.ws.rs.*;
+import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 
@@ -39,7 +43,7 @@ public class MusicApplication extends Application{
             mp3Info.put("tamanho", (mp3file.getLength() + " bytes"));
             mp3Info.put("taxa de bits", mp3file.getBitrate() + " kbps " + "(" + vbrString(mp3file.isVbr())+")");
             mp3Info.put("versão do MP3", mp3file.getVersion());
-            mp3Info.put("taxa de amostragem", mp3file.getSampleRate() + "Hz");
+            mp3Info.put("taxa de amostragem", mp3file.getSampleRate() + " Hz");
             mp3Info.put("channel", mp3file.getChannelMode());
             mp3Info.put("id3v1", englishBoolToPortugueseHave(mp3file.hasId3v1Tag()));
             mp3Info.put("id3v2", englishBoolToPortugueseHave(mp3file.hasId3v2Tag()));

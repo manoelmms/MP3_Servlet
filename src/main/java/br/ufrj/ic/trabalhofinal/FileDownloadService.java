@@ -1,10 +1,19 @@
+/*
+ *Manoel Marcelo da Silva (DRE: 121088349)
+ *Lucas de Lyra Monteiro (DRE: 121039714)
+ */
+
 package br.ufrj.ic.trabalhofinal;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URLDecoder;
 
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/api/download/*")
 public class FileDownloadService extends HttpServlet {

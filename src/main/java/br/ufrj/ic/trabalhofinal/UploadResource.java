@@ -1,6 +1,13 @@
+/*
+ *Manoel Marcelo da Silva (DRE: 121088349)
+ *Lucas de Lyra Monteiro (DRE: 121039714)
+ */
+
 package br.ufrj.ic.trabalhofinal;
 
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 
 @Path("/file") //Página Inicial
 public class UploadResource{
