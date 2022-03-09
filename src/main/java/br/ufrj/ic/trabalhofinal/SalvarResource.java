@@ -65,13 +65,21 @@ public class SalvarResource {
 
 
     protected static String sucessoHTML(String filename){
-        String html = "<html><head><meta charset=\"UTF-8\"><title>Sucesso!</title></head>";
+        String html = "<html><head><meta charset=\"UTF-8\"><title>Sucesso!</title>" +
+                Styles.SalvarResourceCSS() +
+                "</head>";
         html += "<body><header><nav>" +
-                "<h1>Download do Arquivo</h1><p><a href=\"file\">Voltar</a></p>" +
+                "<h1>Download do Arquivo</h1><p><a href=\"file\">Escolher outra música →</a></p>" +
                 "</nav></header>" +
                 "<main>"+
                 "<h2>Sucesso no Upload!</h2>" +
-                "<a href=\"download\\" + filename + "\">DOWNLOAD</a>" +
+                "<div id=\"download-div\">" +
+                "<form method=\"GET\" action=\"download\\" + filename + "\">" +
+                "<input id=\"download-image\" type=\"submit\" value=\"Download\">\n" +
+                "</form>" +
+                "</div>" +
+                //"<a id=\"download-image\" href=\"download\\" + filename + "\">DOWNLOAD</a>" +
+
                 "</main></body></html>";
         return html;
     }

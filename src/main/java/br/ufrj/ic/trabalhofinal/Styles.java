@@ -109,15 +109,16 @@ public class Styles {
 
         css +=  "nav{\n" +
                 "    display: flex;\n" +
-                "    justify-content: space-around;\n" +
+                "    justify-content: space-between;\n" +
                 "    align-items: center;\n" +
                 "    background: #006494;\n" +
-                "    height: 8vh;" +
+                "    height: 8vh;\n" +
                 "}\n";
 
         css +=  "a{\n" +
                 "    color: white;\n" +
                 "    text-decoration: none;\n" +
+                "    margin-right: 3vh;\n" +
                 "}\n\n" +
 
                 "a:hover{\n" +
@@ -129,7 +130,7 @@ public class Styles {
                 "      display: grid;\n" +
                 "      margin-top: 3vh;" +
                 "      grid-gap: 20px;\n" +
-                "      height: 89vh;" +
+                "      height: 89vh;\n" +
                 "}\n";
 
         css +=  "form, .immutables {\n" +
@@ -164,7 +165,7 @@ public class Styles {
                 "    margin-bottom: 1vh;\n" +
                 "}\n";
 
-        css +=  "input{\n" +
+        css +=  "input, select{\n" +
                 "    height: 30px;\n" +
                 "    width: 100%;\n" +
                 "    padding-left: 15px;\n" +
@@ -197,9 +198,99 @@ public class Styles {
                 "    text-align: center;\n" +
                 "    justify-content: center;\n" +
                 "    color: white;\n" +
-                "\n";
+                "    margin-left: 3vh;\n"+
+                "}\n";
 
 
+        css += "</style>";
+        return css;
+    }
+
+    public static String SalvarResourceCSS(){
+        String css = "<style>";
+        css += "*{\n" +
+                "    margin: 0;\n" +
+                "    padding: 0;\n" +
+                "    box-sizing: border-box;\n" +
+                "    font-family: Verdana, SansSerif;\n" +
+                "}\n";
+
+        css +=  "body{\n" +
+                "    background-color: #13293D;\n" +
+                "    vertical-align: top;\n" +
+                "}\n";
+
+        css +=  "nav{\n" +
+                "    display: flex;\n" +
+                "    justify-content: space-between;\n" +
+                "    align-items: center;\n" +
+                "    background: #006494;\n" +
+                "    height: 8vh;\n" +
+                "}\n";
+
+        css +=  "a{\n" +
+                "    color: white;\n" +
+                "    text-decoration: none;\n" +
+                "    margin-right: 3vh;\n" +
+                "}\n\n" +
+
+                "a:hover{\n" +
+                "    color: red;\n" +
+                "    opacity: 0.8;\n" +
+                "}\n";
+
+        css +=  "main{\n" +
+                "    position: relative;\n" +
+                "    margin: auto;\n" +
+                "    top: 50%;\n" +
+                "    transform: translateY(-50%);\n" +
+                "    width: 75vh;\n" +
+                "    height: 75vh;\n" +
+                "    background: #E8F1F2;\n" +
+                "    padding: 35px 35px 10px;\n" +
+                "    border-radius: 10px;\n" +
+                "    display: grid;\n" +
+                "    box-sizing: border-box;\n" +
+                "    grid-template-rows: repeat(3, auto);\n" +
+                "}\n";
+
+        css+=   "h2{\n" +
+                "    flex-direction: column;\n" +
+                "    justify-content: center;\n" +
+                "    align-items: center;\n" +
+                "    display: flex;\n" +
+                "    width: 100%;\n" +
+                "}\n\n" +
+
+                "h1{\n" +
+                "    color: white;\n" +
+                "    margin-left: 3vh;\n" +
+                "}\n";
+
+
+        css +=  ".download-div{\n" +
+                "    position: absolute;\n" +
+                "    grid-row: 2/5;\n" +
+                "    background-color: rgba(0, 0, 255, 0.1);\n" +
+                "    margin-bottom: 10px;\n" +
+                "}\n";
+
+        css +=  "#download-image{\n" +
+                "    color: black;\n" +
+                "    margin-bottom: auto;\n" +
+                "    background-color: rgba(0, 0, 255, 0.1);\n" +
+                "    width: 100%;\n" +
+                "    height: 100%;\n" +
+                "    border-radius: 10px;\n" +
+                "    border: none;\n" +
+                "    cursor: pointer;\n" +
+                "    font-size: 20px;\n" +
+                "}\n\n" +
+
+                "#download-image:hover{\n" +
+                "    color: black;\n" +
+                "    background-color: rgba(9, 236, 100, 0.2);;\n" +
+                "}\n";
         css += "</style>";
         return css;
     }
