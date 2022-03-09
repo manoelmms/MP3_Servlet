@@ -165,7 +165,7 @@ public class Styles {
                 "    margin-bottom: 1vh;\n" +
                 "}\n";
 
-        css +=  "input{\n" +
+        css +=  "input, select{\n" +
                 "    height: 30px;\n" +
                 "    width: 100%;\n" +
                 "    padding-left: 15px;\n" +
