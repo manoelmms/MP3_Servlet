@@ -128,7 +128,7 @@ public class MusicResource {
         return selectHtmlTag;
     }
 
-    public static String stringWrittenNull(Object object) {
+    private static String stringWrittenNull(Object object) {
         return (object==null) ? "":object.toString();
     }
 }

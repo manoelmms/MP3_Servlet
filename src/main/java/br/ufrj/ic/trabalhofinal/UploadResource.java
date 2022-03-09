@@ -2,7 +2,7 @@ package br.ufrj.ic.trabalhofinal;
 
 import javax.ws.rs.*;
 
-@Path("/file")
+@Path("/file") //Página Inicial
 public class UploadResource{
 
     @GET

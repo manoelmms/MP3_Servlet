@@ -6,6 +6,7 @@ import javax.ws.rs.Produces;
 
 @Path("/erro")
 public class ErroResource {
+
     @GET
     @Produces("text/html")
     public String erroHtml() {
