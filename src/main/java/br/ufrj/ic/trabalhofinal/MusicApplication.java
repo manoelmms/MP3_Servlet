@@ -14,7 +14,7 @@ import javax.ws.rs.core.Application;
 @ApplicationPath("/api")
 @MultipartConfig
 public class MusicApplication extends Application{
-    protected static String FILEPATH = "./output.mp3";
+    protected final static String FILEPATH = "./output.mp3";
 
     protected static String erroHtml(String exception){
 
