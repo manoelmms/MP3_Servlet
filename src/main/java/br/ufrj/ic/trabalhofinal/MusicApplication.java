@@ -1,14 +1,9 @@
 package br.ufrj.ic.trabalhofinal;
 
-import com.mpatric.mp3agic.ID3v1;
+import com.mpatric.mp3agic.*;
 
-import com.mpatric.mp3agic.ID3v2;
-import com.mpatric.mp3agic.ID3v24Tag;
-import com.mpatric.mp3agic.Mp3File;
-
-import java.util.HashMap;
+import java.io.IOException;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.ws.rs.*;
@@ -27,9 +22,9 @@ public class MusicApplication extends Application{
         return html;
     }
 
-    protected static LinkedHashMap<String, Object> immutableData(String filepath){
+    protected static LinkedHashMap<String, Object> immutableData(String filepath) throws IOException, UnsupportedTagException, InvalidDataException{
         LinkedHashMap<String, Object> mp3Info = new LinkedHashMap<>();
-        try {
+
             Mp3File mp3file = new Mp3File(filepath);
             mp3Info.put("duração (min:seg)", secondsToMinutesColonSeconds(mp3file.getLengthInSeconds()));
             mp3Info.put("tamanho", (mp3file.getLength() + " bytes"));
@@ -42,15 +37,11 @@ public class MusicApplication extends Application{
             mp3Info.put("custom", englishBoolToPortugueseHave(mp3file.hasCustomTag()));
             return mp3Info;
 
-        }catch (Exception e){
-            return null;
-        }
     }
 
-    protected static LinkedHashMap<String, String> mutableData(String filepath){
+    protected static LinkedHashMap<String, String> mutableData(String filepath) throws IOException, UnsupportedTagException, InvalidDataException{
         LinkedHashMap<String, String> id3v2Map = new LinkedHashMap<>();
 
-        try {
             Mp3File mp3file = new Mp3File(filepath);
             ID3v2 id3v2Tag;
 
@@ -97,10 +88,6 @@ public class MusicApplication extends Application{
             id3v2Map.put("encoder", id3v2Tag.getEncoder());
             //id3v2tag.put("Imagem do album", id3v2Tag.getAlbumImage());
             return id3v2Map;
-
-        }catch (Exception e){
-            return null;
-        }
     }
 
     protected static String secondsToMinutesColonSeconds(long seconds){
