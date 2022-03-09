@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+
 @Path("/listar")
 public class MusicResource {
 
@@ -33,92 +34,10 @@ public class MusicResource {
     @GET
     @Produces("text/html")
     public String listar(@QueryParam("q") @DefaultValue("") String filename) {
-        return createFinalHTML(filename);
-    }
-
-
-    private static String immutableObjectsHTML() throws IOException, UnsupportedTagException, InvalidDataException {
-        Map<String, Object> immutableInfoMP3 = MusicApplication.immutableData(MusicApplication.filepath);
-        String immutables = "<div class=immutables>";
-        immutables += "<h2>Dados imutáveis</h2>";
-        immutables += "<ul>";
-
-        for (Map.Entry<String, Object> tags : immutableInfoMP3.entrySet()){
-            immutables += "<li>" + StringUtils.capitalize(tags.getKey())  + ": " + tags.getValue() + "</li>";
-        }
-        immutables += "</ul></div>";
-        return immutables;
-    }
-
-
-    private static String htmlForm(String filename) throws IOException, UnsupportedTagException, InvalidDataException {
-        LinkedHashMap<String, String> mutableInfoMP3 = MusicApplication.mutableData(MusicApplication.filepath);
-        mutableInfoMP3.put("filename", filename.replace(".mp3", ""));
-
-        String formhtml = "<form method=\"GET\" action=\"salvar\">";
-        formhtml += "<fieldset><legend>Dados mutáveis</legend>";
-
-
-        for (Map.Entry<String,String> tags : mutableInfoMP3.entrySet()){
-            formhtml += "<div class=\"form-div\">";
-            formhtml += "<label class=\"mutable-label\" for='" + tags.getKey() + "'>" + StringUtils.capitalize(tags.getKey()) + ":</label>";
-            if (!tags.getKey().equals("gênero")){
-                formhtml += "<input type=\"text\" name='" + tags.getKey() + "'value='" + stringWrittenNull(tags.getValue()) + "'>";
-            }else{
-                formhtml += createGenreSelect();
-            }
-
-
-            formhtml += "</div>";
-        }
-
-
-        formhtml += "<input type=\"submit\" value=\"Salvar\"></input>";
-        formhtml += "</fieldset></form>";
-
-        return formhtml;
-    }
-
-    private static LinkedHashMap<Integer, String> genresMap(){
-        LinkedHashMap<Integer, String> genres = new LinkedHashMap<>();
-
-        for(String g : genreList){
-            String[] pares = g.split(" - ");
-            genres.put(Integer.valueOf(pares[0]), pares[1]);
-        }
-        return genres;
-    }
-
-    private static String createGenreSelect() throws IOException, UnsupportedTagException, InvalidDataException{
-        LinkedHashMap<Integer, String> genres = genresMap();
-        LinkedHashMap<String, String> mutableInfoMP3 = MusicApplication.mutableData(MusicApplication.filepath);
-
-        String selectHtml = "<select name=\"gênero\">";
-
-        for(Map.Entry<Integer,String> gen : genres.entrySet()){
-            if(mutableInfoMP3.get("gênero")!=null){
-                if(mutableInfoMP3.get("gênero").equals(gen.getValue())){
-                    selectHtml += "<option value='" + gen.getKey() + "'selected>" + gen.getValue() + "</option>";
-                }
-                else{
-                    selectHtml += "<option value='" + gen.getKey() + "'>" + gen.getValue() + "</option>";
-                }
-            }else{
-                selectHtml += "<option value='" + gen.getKey() + "'>" + gen.getValue() + "</option>";
-            }
-        }
-        selectHtml += "</select>";
-
-        return selectHtml;
-    }
-
-
-    public static String createFinalHTML(String filename){
-        try{
+        try {
             String html = "<html><head><meta charset=\"UTF-8\">" +
                     "<title>Dados do MP3</title>" +
                     Styles.MusicResourceCSS() +
-                    //"<link rel='stylesheet' type='text/css' href='" + HttpServletRequest.getPathInfo() + "/music-resource.css'/>" +
                     "</head>";
 
             html += "<body>" +
@@ -129,9 +48,84 @@ public class MusicResource {
                     "<body></html>";
 
             return html;
-        }catch(Exception e){
+        } catch (Exception e) {
             return MusicApplication.erroHTML(e.getMessage());
         }
+    }
+
+    private static String immutableObjectsHTML() throws IOException, UnsupportedTagException, InvalidDataException {
+        Map<String, Object> immutableInfoMP3 = MusicApplication.immutableData(MusicApplication.filepath);
+
+        String immutables = "<div class=immutables>";
+        immutables += "<h2>Dados imutáveis</h2>";
+        immutables += "<ul>";
+
+        for (Map.Entry<String, Object> tags : immutableInfoMP3.entrySet()) {
+            immutables += "<li>" + StringUtils.capitalize(tags.getKey())  + ": " + tags.getValue() + "</li>";
+        }
+
+        immutables += "</ul></div>";
+        return immutables;
+    }
+
+    private static String htmlForm(String filename) throws IOException, UnsupportedTagException, InvalidDataException {
+        LinkedHashMap<String, String> mutableInfoMP3 = MusicApplication.mutableData(MusicApplication.filepath);
+        mutableInfoMP3.put("filename", filename.replace(".mp3", ""));
+
+        String formhtml = "<form method=\"GET\" action=\"salvar\">";
+        formhtml += "<fieldset><legend>Dados mutáveis</legend>";
+
+        for (Map.Entry<String,String> tags : mutableInfoMP3.entrySet()) {
+            formhtml += "<div class=\"form-div\">";
+            formhtml += "<label class=\"mutable-label\" for='" + tags.getKey() + "'>" + StringUtils.capitalize(tags.getKey()) + ":</label>";
+
+            if (!tags.getKey().equals("gênero")) {
+                formhtml += "<input type=\"text\" name='" + tags.getKey() + "'value='" + stringWrittenNull(tags.getValue()) + "'>";
+            } else {
+                formhtml += createGenreSelect();
+            }
+
+            formhtml += "</div>";
+        }
+
+        formhtml += "<input type=\"submit\" value=\"Salvar\"></input>";
+        formhtml += "</fieldset></form>";
+
+        return formhtml;
+    }
+
+    private static LinkedHashMap<Integer, String> genresMap() {
+        LinkedHashMap<Integer, String> genres = new LinkedHashMap<>();
+
+        for (String g : genreList) {
+            String[] pares = g.split(" - ");
+            genres.put(Integer.valueOf(pares[0]), pares[1]);
+        }
+
+        return genres;
+    }
+
+    private static String createGenreSelect() throws IOException, UnsupportedTagException, InvalidDataException {
+        LinkedHashMap<Integer, String> genres = genresMap();
+        LinkedHashMap<String, String> mutableInfoMP3 = MusicApplication.mutableData(MusicApplication.filepath);
+
+        String selectHtml = "<select name=\"gênero\">";
+
+        for (Map.Entry<Integer,String> gen : genres.entrySet()) {
+            if (mutableInfoMP3.get("gênero")!=null) {
+                if (mutableInfoMP3.get("gênero").equals(gen.getValue())) {
+                    selectHtml += "<option value='" + gen.getKey() + "'selected>" + gen.getValue() + "</option>";
+                } else {
+                    selectHtml += "<option value='" + gen.getKey() + "'>" + gen.getValue() + "</option>";
+                }
+            } else {
+                selectHtml += "<option value='" + gen.getKey() + "'>" + gen.getValue() + "</option>";
+            }
+        }
+
+        selectHtml += "</select>";
+
+        return selectHtml;
     }
 
     public static String stringWrittenNull(Object object){
