@@ -2,7 +2,7 @@ package br.ufrj.ic.trabalhofinal;
 
 public class Styles {
 
-    public static String UploadResourceCSS() {
+    protected static String UploadResourceCSS() {
         String css = "<style>";
 
         css += "*{\n" +
@@ -92,7 +92,7 @@ public class Styles {
         return css;
     }
 
-    public static String MusicResourceCSS() {
+    protected static String MusicResourceCSS() {
         String css = "<style>";
         css += "*{\n" +
                 "    margin: 0;\n" +
@@ -203,7 +203,7 @@ public class Styles {
         return css;
     }
 
-    public static String SalvarResourceCSS() {
+    protected static String SalvarResourceCSS() {
         String css = "<style>";
 
         css += "*{\n" +

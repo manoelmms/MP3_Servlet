@@ -13,7 +13,7 @@ import javax.ws.rs.core.Application;
 @ApplicationPath("/api")
 @MultipartConfig
 public class MusicApplication extends Application{
-    public static String filepath = "./output.mp3";
+    protected static final String FILEPATH = "./output.mp3";
 
     protected static String erroHtml(String exception){
 
@@ -98,11 +98,11 @@ public class MusicApplication extends Application{
         return "CBR";
     }
 
-    protected static String secondsToMinutesColonSeconds(long seconds) {
+    private static String secondsToMinutesColonSeconds(long seconds) {
         return (int)seconds / 60 + ":" + String.format("%02d", seconds % 60);
     }
 
-    protected static String englishBoolToPortugueseHave(boolean bool) {
+    private static String englishBoolToPortugueseHave(boolean bool) {
         return bool?"Possui":"Não possui";
     }
 }
