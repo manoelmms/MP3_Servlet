@@ -93,7 +93,6 @@ public class Styles {
     }
 
 
-
     public static String MusicResourceCSS(){
         String css = "<style>";
         css += "*{\n" +
@@ -206,6 +205,7 @@ public class Styles {
         return css;
     }
 
+
     public static String SalvarResourceCSS(){
         String css = "<style>";
         css += "*{\n" +
@@ -291,6 +291,7 @@ public class Styles {
                 "    color: black;\n" +
                 "    background-color: rgba(9, 236, 100, 0.2);;\n" +
                 "}\n";
+
         css += "</style>";
         return css;
     }

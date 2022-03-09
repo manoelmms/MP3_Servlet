@@ -19,25 +19,33 @@ public class SalvarResource {
                          @QueryParam("url") @DefaultValue("") String url, @QueryParam("encoder") @DefaultValue("") String encoder,
                          @QueryParam("artista do álbum") @DefaultValue("") String artAlbum,
                          @QueryParam("filename") @DefaultValue("") String filename){
+
         return salvarParam(titulo, artista, album, faixa, ano, genero, compositor, original, comentario, copyright, url, encoder, artAlbum, filename);
     }
+
+
     protected static String salvarParam(String titulo, String artista, String album, String faixa, String ano,
-                                        String genero,
-                                        String compositor,
-                                        String original, String comentario, String copyright, String url, String encoder,
-                                        String artAlbum,
-                                        String filename){
+                                        String genero, String compositor, String original, String comentario,
+                                        String copyright, String url, String encoder, String artAlbum, String filename){
+
         try {
             filename += ".mp3";
             Mp3File mp3file = new Mp3File(MusicApplication.filepath);
-            ID3v2 oldId3v2Tag;
-            //oldId3v2Tag = new ID3v24Tag();
-            oldId3v2Tag = mp3file.getId3v2Tag();
-            byte[] albumImageData = oldId3v2Tag.getAlbumImage();
-            String mimeType = oldId3v2Tag.getAlbumImageMimeType();
+
+            ID3v2 oldId3v2Tag = null;
+            byte[] albumImageData = null;
+            String mimeType = null;
+
+            if (mp3file.hasId3v2Tag()) {
+                oldId3v2Tag = mp3file.getId3v2Tag();
+                albumImageData = oldId3v2Tag.getAlbumImage();
+                mimeType = oldId3v2Tag.getAlbumImageMimeType();
+            }
+
             mp3file.removeId3v2Tag();
             ID3v2 id3v2Tag;
             id3v2Tag = new ID3v24Tag();
+
             mp3file.setId3v2Tag(id3v2Tag);
             id3v2Tag.setTitle(titulo);
             id3v2Tag.setArtist(artista);
@@ -48,18 +56,21 @@ public class SalvarResource {
                 id3v2Tag.setGenre(Integer.parseInt(genero));
             }
             id3v2Tag.setComposer(compositor);
-            id3v2Tag.setOriginalArtist(original);
+            id3v2Tag.setOriginalArtist(original
+            );
             id3v2Tag.setAlbumArtist(artAlbum);
             id3v2Tag.setComment(comentario);
             id3v2Tag.setCopyright(copyright);
             id3v2Tag.setUrl(url);
             id3v2Tag.setEncoder(encoder);
-            id3v2Tag.setAlbumImage(albumImageData, mimeType);
+            if(oldId3v2Tag != null){
+                id3v2Tag.setAlbumImage(albumImageData, mimeType);
+            }
             mp3file.save(filename);
 
             return sucessoHTML(filename);
         }catch (Exception e){
-            return MusicApplication.erroHTML(e.getMessage());
+            return MusicApplication.erroHtml(e.getMessage());
         }
     }
 
@@ -78,7 +89,6 @@ public class SalvarResource {
                 "<input id=\"download-image\" type=\"submit\" value=\"Download\">\n" +
                 "</form>" +
                 "</div>" +
-                //"<a id=\"download-image\" href=\"download\\" + filename + "\">DOWNLOAD</a>" +
 
                 "</main></body></html>";
         return html;

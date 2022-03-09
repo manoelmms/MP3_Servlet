@@ -16,7 +16,7 @@ public class MusicApplication extends Application{
     public static String filepath = "./output.mp3";
 
 
-    protected static String erroHTML(String exception){
+    protected static String erroHtml(String exception){
         String html = "<html><head><meta charset=\"UTF-8\"><title>Erro!</title></head>";
         html += "<body><h2>Deu ruim!</h2><p>O arquivo não pôde ser Lido/Gravado ou seu formato é incompartível! Erro: '"+ exception +"'</p><p><a href=\"file\">Voltar</a></p></body></html>";
         return html;
@@ -52,7 +52,6 @@ public class MusicApplication extends Application{
                 id3v2Tag = new ID3v24Tag();
                 mp3file.setId3v2Tag(id3v2Tag);
                 ID3v1 id3v1Tag;
-                //id3v2Tag = (ID3v2) mp3file.getId3v1Tag(); /*tem que ver se isso funciona*/
                 id3v1Tag = mp3file.getId3v1Tag();
                 id3v2Tag.setTitle(id3v1Tag.getTitle());
                 id3v2Tag.setArtist(id3v1Tag.getArtist());
@@ -62,7 +61,7 @@ public class MusicApplication extends Application{
                 id3v2Tag.setGenreDescription(id3v1Tag.getGenreDescription());
                 id3v2Tag.setComposer(""); /*ID3V1 não tem a tag Composer*/
                 id3v2Tag.setOriginalArtist(""); /*ID3V1 não tem a tag OriginalArtist*/
-                id3v2Tag.setComposer(id3v1Tag.getComment());
+                id3v2Tag.setComment(id3v1Tag.getComment());
                 id3v2Tag.setCopyright(""); /*ID3V1 não tem a tag Copyright*/
                 id3v2Tag.setUrl(""); /*ID3V1 não tem a tag Url*/
                 id3v2Tag.setEncoder(""); /*ID3V1 não tem a tag Encoder*/
@@ -70,7 +69,6 @@ public class MusicApplication extends Application{
                 id3v2Tag = new ID3v24Tag();
                 mp3file.setId3v2Tag(id3v2Tag);
             }
-
 
             id3v2Map.put("título", id3v2Tag.getTitle());
             id3v2Map.put("artista", id3v2Tag.getArtist());
@@ -86,15 +84,14 @@ public class MusicApplication extends Application{
             id3v2Map.put("copyright", id3v2Tag.getCopyright());
             id3v2Map.put("url", id3v2Tag.getUrl());
             id3v2Map.put("encoder", id3v2Tag.getEncoder());
-            //id3v2tag.put("Imagem do album", id3v2Tag.getAlbumImage());
             return id3v2Map;
     }
 
-    protected static String secondsToMinutesColonSeconds(long seconds){
+    private static String secondsToMinutesColonSeconds(long seconds){
         return (int)seconds / 60 + ":" + String.format("%02d", seconds % 60);
     }
 
-    protected static String englishBoolToPortugueseHave(boolean bool){
+    private static String englishBoolToPortugueseHave(boolean bool){
         return bool?"Possui":"Não possui";
     }
 }
