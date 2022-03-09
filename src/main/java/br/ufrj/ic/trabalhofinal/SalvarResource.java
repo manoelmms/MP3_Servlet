@@ -18,13 +18,15 @@ public class SalvarResource {
                          @QueryParam("compositor") @DefaultValue("") String compositor, @QueryParam("artista original") @DefaultValue("") String original,
                          @QueryParam("comentário") @DefaultValue("") String comentario, @QueryParam("copyright") @DefaultValue("") String copyright,
                          @QueryParam("url") @DefaultValue("") String url, @QueryParam("encoder") @DefaultValue("") String encoder,
+                         @QueryParam("artista do álbum") @DefaultValue("") String artAlbum,
                          @QueryParam("filename") @DefaultValue("") String filename){
-        return salvarParam(titulo, artista, album, faixa, ano, genero, compositor, original, comentario, copyright, url, encoder, filename);
+        return salvarParam(titulo, artista, album, faixa, ano, genero, compositor, original, comentario, copyright, url, encoder, artAlbum, filename);
     }
     protected static String salvarParam(String titulo, String artista, String album, String faixa, String ano,
                                         String genero,
                                         String compositor,
                                         String original, String comentario, String copyright, String url, String encoder,
+                                        String artAlbum,
                                         String filename){
         try {
             filename += ".mp3";
@@ -34,7 +36,6 @@ public class SalvarResource {
             oldId3v2Tag = mp3file.getId3v2Tag();
             byte[] albumImageData = oldId3v2Tag.getAlbumImage();
             String mimeType = oldId3v2Tag.getAlbumImageMimeType();
-
             mp3file.removeId3v2Tag();
             ID3v2 id3v2Tag;
             id3v2Tag = new ID3v24Tag();
@@ -44,17 +45,19 @@ public class SalvarResource {
             id3v2Tag.setAlbum(album);
             id3v2Tag.setTrack(faixa);
             id3v2Tag.setYear(ano);
-            if(!genero.equals("-1")) {
+            if(!genero.equals("-1")){
                 id3v2Tag.setGenre(Integer.valueOf(genero));
             }
             id3v2Tag.setComposer(compositor);
             id3v2Tag.setOriginalArtist(original);
+            id3v2Tag.setAlbumArtist(artAlbum);
             id3v2Tag.setComment(comentario);
             id3v2Tag.setCopyright(copyright);
             id3v2Tag.setUrl(url);
             id3v2Tag.setEncoder(encoder);
             id3v2Tag.setAlbumImage(albumImageData, mimeType);
             mp3file.save(filename);
+
             return sucessoHTML(filename);
         }catch (Exception e){
             return MusicApplication.erroHTML();

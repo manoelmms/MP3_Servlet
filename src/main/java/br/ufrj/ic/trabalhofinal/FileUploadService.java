@@ -29,8 +29,7 @@ public class FileUploadService extends HttpServlet {
             Files.copy(fileContent, file.toPath(), StandardCopyOption.REPLACE_EXISTING);//Grava no arquivo preparado
             response.sendRedirect("/TrabalhoFinal-1.0-SNAPSHOT/api/listar?q="+fileName);
         }catch (IOException e){
-            response.sendRedirect("/TrabalhoFinal-1.0-SNAPSHOT/api/"); // TODO: fazer endpoint erro
-            //MusicApplication.erroHTML();
+            response.sendRedirect("/TrabalhoFinal-1.0-SNAPSHOT/api/erro");
         }
     }
 
