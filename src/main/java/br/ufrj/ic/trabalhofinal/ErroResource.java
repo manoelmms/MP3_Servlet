@@ -10,8 +10,15 @@ public class ErroResource {
     @GET
     @Produces("text/html")
     public String erroHtml() {
-        String html = "<html><head><meta charset=\"UTF-8\"><title>Erro!</title></head>";
-        html += "<body><h2>Deu ruim!</h2><p>O arquivo não foi Upado/Enviado! Tente Novamente.</p><p><a href=\"file\">Voltar</a></p></body></html>";
+        String html = "<html><head><meta charset=\"UTF-8\"><title>Erro!</title>" +
+                Styles.ErroResourceCSS() +
+                "</head>";
+
+        html += "<body><main>" +
+                "<h1>Deu ruim!</h1>" +
+                "<p>O arquivo não foi Upado/Enviado!<br><br> Tente Novamente.</p>" +
+                "<a class=\"button\" href=\"file\">Clique aqui para voltar ao menu inicial</a>" +
+                "</main></body></html>";
 
         return html;
     }

@@ -8,8 +8,10 @@ public class UploadResource{
     @GET
     @Produces("text/html")
     public String uploadForm() {
-        String html = "<html><head><meta charset=\"UTF-8\"><title>Enviar MP3</title></head>" +
+        String html = "<html><head><meta charset=\"UTF-8\"><title>Enviar MP3</title>" +
                 Styles.UploadResourceCSS() +
+                "</head>" +
+
                 "<body>" +
                 "<form action=\"upload\" method=\"post\" enctype=\"multipart/form-data\">" +
                 "<h1>Escolha um arquivo MP3:</h1>" +

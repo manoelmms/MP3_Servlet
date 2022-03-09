@@ -168,6 +168,8 @@ public class Styles {
                 "    width: 100%;\n" +
                 "    padding-left: 15px;\n" +
                 "    border-radius: 10px;\n" +
+                "    border: 2px;\n" +
+                "    border-style: inset;\n" +
                 "}\n\n" +
 
                 ".mutable-label{\n" +
@@ -291,7 +293,92 @@ public class Styles {
                 "}\n";
 
         css += "</style>";
+        return css;
+    }
 
+    protected static String ErroResourceCSS() {
+        String css = "<style>";
+
+        css += "*{\n" +
+                "    margin: 0;\n" +
+                "    padding: 0;\n" +
+                "    box-sizing: border-box;\n" +
+                "    font-family: Verdana, SansSerif;\n" +
+                "}\n";
+
+        css +=  "body{\n" +
+                "    background-color: #13293D;\n" +
+                "    vertical-align: top;\n" +
+                "}\n";
+
+        css +=  "nav{\n" +
+                "    display: flex;\n" +
+                "    justify-content: space-between;\n" +
+                "    align-items: center;\n" +
+                "    background: #006494;\n" +
+                "    height: 8vh;\n" +
+                "}\n";
+
+        css +=  "a{\n" +
+                "    color: black;\n" +
+                "    text-decoration: none;\n" +
+                "    margin-right: 3vh;\n" +
+                "}\n\n" +
+
+                "a:hover{\n" +
+                "    color: red;\n" +
+                "    opacity: 0.8;\n" +
+                "}\n";
+
+        css +=  "main{\n" +
+                "    position: relative;\n" +
+                "    margin: auto;\n" +
+                "    top: 50%;\n" +
+                "    transform: translateY(-50%);\n" +
+                "    width: 75vh;\n" +
+                "    height: 75vh;\n" +
+                "    background: #E8F1F2;\n" +
+                "    padding: 35px 35px 10px;\n" +
+                "    border-radius: 10px;\n" +
+                "    display: grid;\n" +
+                "    box-sizing: border-box;\n" +
+                "    grid-template-rows: repeat(3, auto);\n" +
+                "}\n";
+
+        css+=   "h1{\n" +
+                "    flex-direction: column;\n" +
+                "    justify-content: center;\n" +
+                "    align-items: center;\n" +
+                "    display: flex;\n" +
+                "    width: 100%;\n" +
+                "}\n";
+
+
+        css +=  "a{\n" +
+                "    color: black;\n" +
+                "    -webkit-appearance: button;\n" +
+                "    -moz-appearance: button;\n" +
+                "    appearance: button;\n" +
+                "    flex-direction: column;\n" +
+                "    justify-content: center;\n" +
+                "    align-items: center;\n" +
+                "    display: flex;\n" +
+                "    margin-bottom: auto;\n" +
+                "    background-color: rgba(0, 0, 255, 0.1);\n" +
+                "    width: 100%;\n" +
+                "    height: 100%;\n" +
+                "    border-radius: 10px;\n" +
+                "    border: none;\n" +
+                "    cursor: pointer;\n" +
+                "    font-size: 20px;\n" +
+                "}\n\n" +
+
+                "a:hover{\n" +
+                "    color: black;\n" +
+                "    background-color: rgba(9, 236, 100, 0.2);;\n" +
+                "}\n";
+
+        css += "</style>";
         return css;
     }
 }
