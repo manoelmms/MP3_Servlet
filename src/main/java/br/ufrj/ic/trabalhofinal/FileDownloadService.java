@@ -3,14 +3,13 @@ package br.ufrj.ic.trabalhofinal;
 import java.io.*;
 import java.net.URLDecoder;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 @WebServlet("/api/download/*")
 public class FileDownloadService extends HttpServlet {
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException{
         try {
             // Get PrintWriter object
             PrintWriter out = response.getWriter();

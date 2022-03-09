@@ -21,7 +21,7 @@ public class FileUploadService extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Part filePart = request.getPart("file"); // Recebe o Input do file
-        String fileName = nameWhitoutAmpersand(Paths.get(filePart.getSubmittedFileName()).getFileName().toString()); // Nome do Arquivo
+        String fileName = nameWithoutAmpersand(Paths.get(filePart.getSubmittedFileName()).getFileName().toString()); // Nome do Arquivo
         //InputStream fileContent = filePart.getInputStream();
         File uploads = new File("./"); //Prepara a gravação no local escolhido
         File file = new File(uploads, "output.mp3");
@@ -33,7 +33,7 @@ public class FileUploadService extends HttpServlet {
         }
     }
 
-    public String nameWhitoutAmpersand(String filename) {
+    public String nameWithoutAmpersand(String filename) {
         StringBuilder str = new StringBuilder();
         for (int character=0; character <filename.length(); ++character) {
             if (filename.charAt(character) != '&'){
