@@ -32,7 +32,7 @@ public class FileUploadService extends HttpServlet {
         }
     }
 
-    public String nameWithoutAmpersand(String filename) {
+    private String nameWithoutAmpersand(String filename) {
         StringBuilder str = new StringBuilder();
 
         for (int character=0; character <filename.length(); ++character) {

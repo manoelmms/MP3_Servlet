@@ -28,7 +28,7 @@ public class SalvarResource {
 
         try {
             filename += ".mp3";
-            Mp3File mp3file = new Mp3File(MusicApplication.filepath);
+            Mp3File mp3file = new Mp3File(MusicApplication.FILEPATH);
 
             ID3v2 oldId3v2Tag = null;
             byte[] albumImageData = null;
@@ -75,7 +75,7 @@ public class SalvarResource {
     }
 
 
-    protected static String sucessoHTML(String filename) {
+    private static String sucessoHTML(String filename) {
         String html = "<html><head><meta charset=\"UTF-8\"><title>Sucesso!</title>" +
                 Styles.SalvarResourceCSS() +
                 "</head>";

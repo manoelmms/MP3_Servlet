@@ -75,11 +75,13 @@ legend, h2{
     margin-bottom: 1vh;
 }
 
-input{
+input, select{
     height: 30px;
     width: 100%;
     padding-left: 15px;
     border-radius: 10px;
+    border: 2px;
+    border-style: inset;
 }
 
 .mutable-label{

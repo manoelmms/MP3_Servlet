@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 
 import javax.servlet.annotation.MultipartConfig;
+import javax.swing.text.StyledEditorKit;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Application;
 
@@ -13,12 +14,18 @@ import javax.ws.rs.core.Application;
 @ApplicationPath("/api")
 @MultipartConfig
 public class MusicApplication extends Application{
-    public static String filepath = "./output.mp3";
+    protected static String FILEPATH = "./output.mp3";
 
     protected static String erroHtml(String exception){
 
-        String html = "<html><head><meta charset=\"UTF-8\"><title>Erro!</title></head>";
-        html += "<body><h2>Deu ruim!</h2><p>O arquivo não pôde ser Lido/Gravado ou seu formato é incompartível! Erro: '"+ exception +"'</p><p><a href=\"file\">Voltar</a></p></body></html>";
+        String html = "<html><head><meta charset=\"UTF-8\"><title>Erro!</title>" +
+                Styles.ErroResourceCSS() +
+                "</head>";
+        html += "<body><main>" +
+                "<h1>Deu ruim!</h1>" +
+                "<p>O arquivo não pôde ser Lido/Gravado ou seu formato é incompartível!<br><br> Erro: '"+ exception +"'</p>" +
+                "<a class=\"button\" href=\"file\">Clique aqui para voltar ao menu inicial</a>" +
+                "</main></body></html>";
 
         return html;
     }
@@ -98,11 +105,11 @@ public class MusicApplication extends Application{
         return "CBR";
     }
 
-    protected static String secondsToMinutesColonSeconds(long seconds) {
+    private static String secondsToMinutesColonSeconds(long seconds) {
         return (int)seconds / 60 + ":" + String.format("%02d", seconds % 60);
     }
 
-    protected static String englishBoolToPortugueseHave(boolean bool) {
+    private static String englishBoolToPortugueseHave(boolean bool) {
         return bool?"Possui":"Não possui";
     }
 }

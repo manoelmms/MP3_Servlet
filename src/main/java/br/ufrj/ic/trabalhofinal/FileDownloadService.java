@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 @WebServlet("/api/download/*")
 public class FileDownloadService extends HttpServlet {
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         try {
             PrintWriter out = response.getWriter();

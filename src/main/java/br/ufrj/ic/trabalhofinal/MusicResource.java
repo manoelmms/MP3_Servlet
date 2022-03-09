@@ -13,7 +13,7 @@ import java.util.Map;
 @Path("/listar")
 public class MusicResource {
 
-    public static final String[] GENRE_LIST = {"-1 - Nenhum" ,"0 - Blues", "1 - Classic Rock", "2 - Country", "3 - Dance", "4 - Disco", "5 - Funk", "6 - Grunge",
+    private static final String[] GENRE_LIST = {"-1 - Nenhum" ,"0 - Blues", "1 - Classic Rock", "2 - Country", "3 - Dance", "4 - Disco", "5 - Funk", "6 - Grunge",
             "7 - Hip-Hop", "8 - Jazz", "9 - Metal", "10 - New Age", "11 - Oldies", "12 - Other", "13 - Pop", "14 - R&B", "15 - Rap", "16 - Reggae","17 - Rock",
             "18 - Techno", "19 - Industrial", "20 - Alternative", "21 - Ska", "22 - Death Metal", "23 - Pranks", "24 - Soundtrack", "25 - Euro-Techno", "26 - Ambient",
             "27 - Trip-Hop", "28 - Vocal", "29 - Jazz+Funk", "30 - Fusion", "31 - Trance", "32 - Classical", "33 - Instrumental", "34 - Acid", "35 - House", "36 - Game",
@@ -53,7 +53,7 @@ public class MusicResource {
     }
 
     private static String immutableObjectsHTML() throws IOException, UnsupportedTagException, InvalidDataException {
-        Map<String, Object> immutableInfoMP3 = MusicApplication.immutableData(MusicApplication.filepath);
+        Map<String, Object> immutableInfoMP3 = MusicApplication.immutableData(MusicApplication.FILEPATH);
 
         String immutablesHtml = "<div class=immutables>";
         immutablesHtml += "<h2>Dados imutáveis</h2>";
@@ -69,7 +69,7 @@ public class MusicResource {
     }
 
     private static String htmlForm(String filename) throws IOException, UnsupportedTagException, InvalidDataException {
-        LinkedHashMap<String, String> mutableInfoMP3 = MusicApplication.mutableData(MusicApplication.filepath);
+        LinkedHashMap<String, String> mutableInfoMP3 = MusicApplication.mutableData(MusicApplication.FILEPATH);
         mutableInfoMP3.put("filename", filename.replace(".mp3", ""));
 
         String formHtml = "<form method=\"GET\" action=\"salvar\">";
@@ -107,7 +107,7 @@ public class MusicResource {
 
     private static String GenreHtmlSelect() throws IOException, UnsupportedTagException, InvalidDataException {
         LinkedHashMap<Integer, String> genres = genresMap();
-        LinkedHashMap<String, String> mutableInfoMP3 = MusicApplication.mutableData(MusicApplication.filepath);
+        LinkedHashMap<String, String> mutableInfoMP3 = MusicApplication.mutableData(MusicApplication.FILEPATH);
 
         String selectHtmlTag = "<select name=\"gênero\">";
 
