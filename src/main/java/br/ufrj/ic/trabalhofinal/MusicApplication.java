@@ -20,11 +20,6 @@ import javax.ws.rs.core.Application;
 public class MusicApplication extends Application{
     public static String filepath = "./output.mp3";
 
-    protected static String sucessoHTML(){
-        String html = "<html><head><meta charset=\"UTF-8\"><title>Sucesso!</title></head>";
-        html += "<body><h2>Sucesso no Upload!</h2><p>O arquivo foi gravado com sucesso!</p><p><a href=\"file\">Voltar</a></p></body></html>";
-        return html;
-    }
 
     protected static String erroHTML(){
         String html = "<html><head><meta charset=\"UTF-8\"><title>Erro!</title></head>";
@@ -107,6 +102,7 @@ public class MusicApplication extends Application{
     }
 
     protected static String secondsToMinutesColonSeconds(long seconds){
+
         return (int)seconds / 60 + ":" + (int)seconds % 60;
     }
 

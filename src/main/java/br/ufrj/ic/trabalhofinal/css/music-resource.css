@@ -11,15 +11,22 @@ body{
 
 nav{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     background: #006494;
     height: 8vh;
 }
 
+h1{
+    color: white;
+    margin-left: 3vh;
+
+}
+
 a{
     color: white;
     text-decoration: none;
+    margin-right: 3vh;
 }
 
 a:hover{
