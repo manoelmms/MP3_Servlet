@@ -68,8 +68,9 @@ public class SalvarResource {
 
             mp3file.save(filename);
             return sucessoHTML(filename);
+
         } catch (Exception e) {
-            return MusicApplication.erroHTML(e.getMessage());
+            return MusicApplication.erroHtml(e.getMessage());
         }
     }
 

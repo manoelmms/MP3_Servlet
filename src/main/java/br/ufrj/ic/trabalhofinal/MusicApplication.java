@@ -15,7 +15,8 @@ import javax.ws.rs.core.Application;
 public class MusicApplication extends Application{
     public static String filepath = "./output.mp3";
 
-    protected static String erroHTML(String exception) {
+    protected static String erroHtml(String exception){
+
         String html = "<html><head><meta charset=\"UTF-8\"><title>Erro!</title></head>";
         html += "<body><h2>Deu ruim!</h2><p>O arquivo não pôde ser Lido/Gravado ou seu formato é incompartível! Erro: '"+ exception +"'</p><p><a href=\"file\">Voltar</a></p></body></html>";
 

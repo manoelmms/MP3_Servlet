@@ -289,6 +289,7 @@ public class Styles {
                 "    color: black;\n" +
                 "    background-color: rgba(9, 236, 100, 0.2);;\n" +
                 "}\n";
+
         css += "</style>";
 
         return css;
