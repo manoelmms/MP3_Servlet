@@ -16,11 +16,11 @@ Esta é uma aplicação feita para o projeto final de Computação II em 2021.2 
 
 - Ao fazer deploy do .war no GlassFish 5, o caminho para a página inicial é em ***/TrabalhoFinal-1.0-SNAPSHOT/api/file***
 
-- Na página inicial será requisitado o MP3 a ser lido ou modificado:
+- Na página inicial, será requisitado o MP3 a ser lido ou modificado:
 
 ![Captura de Tela 2022-03-09 às 22 29 46](https://user-images.githubusercontent.com/69607669/157572508-55058b0e-312b-4e3f-8d7b-56643cb0e80d.png)
 
-- Logo após será mostrado os metadados do arquivo enviado e será disponível para alteração:
+- Logo após, será mostrado os metadados do arquivo enviado e será disponível para alteração:
 
 ![Captura de Tela 2022-03-09 às 22 32 01](https://user-images.githubusercontent.com/69607669/157572817-e9ec86d4-e045-4aaf-8d9a-4347ea8f09f1.png)
 
