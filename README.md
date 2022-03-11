@@ -14,7 +14,7 @@ Esta é uma aplicação feita para o projeto final de Computação II em 2021.2 
 
 ## Funcionamento
 
-- Ao fazer deploy do .war no GlassFish 5, o caminho para a página inicial é em ***/TrabalhoFinal-1.0-SNAPSHOT/api/file***
+- Ao fazer deploy do .war no GlassFish 5 usando Java 1.8 (Temurin-1.8), o caminho para a página inicial é em ***/TrabalhoFinal-1.0-SNAPSHOT/api/file***
 
 - Na página inicial, será requisitado o MP3 a ser lido ou modificado[^1]:
 

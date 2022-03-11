@@ -37,6 +37,7 @@ public class FileUploadService extends HttpServlet {
         }
     }
 
+    //Nomes com & dão problema ao ler
     private String nameWithoutAmpersand(String filename) {
         StringBuilder str = new StringBuilder();
 

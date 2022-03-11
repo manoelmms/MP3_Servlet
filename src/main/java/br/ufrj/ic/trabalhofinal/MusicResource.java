@@ -110,6 +110,7 @@ public class MusicResource {
         return genres;
     }
 
+    //Gera um Select dos gêneros usando um for-loop no genresMap, pois o ID3v23 só permite gêneros predefinidos
     private static String GenreHtmlSelect() throws IOException, UnsupportedTagException, InvalidDataException {
         LinkedHashMap<Integer, String> genres = genresMap();
         LinkedHashMap<String, String> mutableInfoMP3 = MusicApplication.mutableData(MusicApplication.FILEPATH);

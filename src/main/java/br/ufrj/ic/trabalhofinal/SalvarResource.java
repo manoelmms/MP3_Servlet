@@ -40,12 +40,14 @@ public class SalvarResource {
             byte[] albumImageData = null;
             String mimeType = null;
 
+            //Uma tag ID3v2 pode ter uma capa de álbum, logo é necessário salvar
             if (mp3file.hasId3v2Tag()) {
                 oldId3v2Tag = mp3file.getId3v2Tag();
                 albumImageData = oldId3v2Tag.getAlbumImage();
                 mimeType = oldId3v2Tag.getAlbumImageMimeType();
             }
 
+            //remove o antigo para colocar os novos parâmetros sem interferência
             mp3file.removeId3v2Tag();
             ID3v2 id3v2Tag;
             id3v2Tag = new ID3v24Tag();
@@ -64,10 +66,12 @@ public class SalvarResource {
             id3v2Tag.setUrl(url);
             id3v2Tag.setEncoder(encoder);
 
+            //Se for selecionado "nenhum" como gênero não será configurado um gênero
             if (!genero.equals("-1")) {
                 id3v2Tag.setGenre(Integer.parseInt(genero));
             }
 
+            //Se a tag suporta capa, será recolocado aqui
             if (oldId3v2Tag != null) {
                 id3v2Tag.setAlbumImage(albumImageData, mimeType);
             }
