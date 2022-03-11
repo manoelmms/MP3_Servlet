@@ -16,7 +16,7 @@ Esta é uma aplicação feita para o projeto final de Computação II em 2021.2 
 
 - Ao fazer deploy do .war no GlassFish 5, o caminho para a página inicial é em ***/TrabalhoFinal-1.0-SNAPSHOT/api/file***
 
-- Na página inicial, será requisitado o MP3 a ser lido ou modificado:
+- Na página inicial, será requisitado o MP3 a ser lido ou modificado[^1]:
 
 ![Captura de Tela 2022-03-09 às 22 29 46](https://user-images.githubusercontent.com/69607669/157572508-55058b0e-312b-4e3f-8d7b-56643cb0e80d.png)
 
@@ -37,4 +37,5 @@ Esta é uma aplicação feita para o projeto final de Computação II em 2021.2 
  - Manoel Marcelo da Silva [@manoelmms](https://github.com/manoelmms)
  - Lucas de Lyra Monteiro [@LucasdeLyra](https://github.com/LucasdeLyra)
 
+[^1]:Na pasta ***src/test/resources/*** estão disponíveis exemplos de arquivos .mp3 funcionais e incompartíveis para o teste do programa (arquivos fornecidos por mp3agic)
 
