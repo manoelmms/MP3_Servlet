@@ -10,13 +10,11 @@ import com.mpatric.mp3agic.*;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 
-import javax.servlet.annotation.MultipartConfig;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 
 @ApplicationPath("/api")
-@MultipartConfig
 public class MusicApplication extends Application{
     protected final static String FILEPATH = "./output.mp3";
 
